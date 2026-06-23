@@ -1,6 +1,6 @@
 package com.dgsw.classcheck.entity;
 
-import com.dgsw.classcheck.statusEnum.StatusEnum;
+import com.dgsw.classcheck.statusEnum.Status;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -18,6 +18,6 @@ public class StudentEntity {
     private int grade;
     private int classNumber;
     private int StudentNumber;
-    private StatusEnum status;
+    private Status status;
 
 }
