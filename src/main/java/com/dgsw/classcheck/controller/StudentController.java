@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -26,9 +27,9 @@ public class StudentController {
         return new CommonResponse("delete");
     }
 
-    @PutMapping("/update")
-    public CommonResponse updateStudent(@PathVariable Long id, @RequestBody StudentRequest studentInfo) {
-
+    @PatchMapping("/update/")
+    public CommonResponse updateStudent(@RequestBody StudentRequest studentInfo) {
+        studentService.UpdateStudent(studentInfo);
     }
 
     @GetMapping("/getAll")
@@ -41,6 +42,6 @@ public class StudentController {
         return studentService.getStudentById(id);
     }
 
-
+    }
 
 }

@@ -1,11 +1,13 @@
 package com.dgsw.classcheck.service;
 
 import com.dgsw.classcheck.dto.StudentAddRequest;
+import com.dgsw.classcheck.dto.StudentRequest;
 import com.dgsw.classcheck.dto.StudentResponse;
 import com.dgsw.classcheck.dto.StudentInfo;
 import com.dgsw.classcheck.entity.StudentEntity;
 import com.dgsw.classcheck.repository.StudentRepository;
 import com.dgsw.classcheck.statusEnum.Status;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,13 @@ public class StudentService {
             throw new IllegalArgumentException("학생을 찾을 수 없습니다.");
         }
         studentRepository.deleteById(id);
+    }
+    @Transactional
+    public void UpdateStudent(StudentRequest studentInfo) {
+        if (!studentRepository.existsById(studentInfo.getId())) {
+            throw new IllegalArgumentException("학생을 찾을 수 없습니다.");
+        }
+
     }
 
     public List<StudentResponse> getStudentByName(String name) {
