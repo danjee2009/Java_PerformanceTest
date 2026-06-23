@@ -6,7 +6,6 @@ import com.dgsw.classcheck.dto.StudentInfo;
 import com.dgsw.classcheck.entity.StudentEntity;
 import com.dgsw.classcheck.repository.StudentRepository;
 import com.dgsw.classcheck.statusEnum.Status;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -36,42 +35,38 @@ public class StudentService {
         }
         studentRepository.deleteById(id);
     }
-    @Transactional
-    public void UpdateStudent(Long id, StudentAddRequest studentInfo) {
-        if (!studentRepository.existsById(id)) {
-
-        }
-    }
 
     public List<StudentResponse> getStudentByName(String name) {
         List<StudentEntity> entities = studentRepository.findAll();
         return null;
     }
 
-    public StudentInfo getStudentById(long id) {
+    public StudentResponse getStudentById(long id) {
         Optional<StudentEntity> optional = studentRepository.findById(id);
         if (optional.isPresent()) {
             StudentEntity studentEntity = optional.get();
-            StudentInfo studentInfo = new StudentInfo();
-            studentInfo.setId(studentEntity.getId());
-            studentInfo.setName(studentEntity.getName());
-            studentInfo.setGrade(studentEntity.getGrade());
-            studentInfo.setClassNumber(studentEntity.getClassNumber());
-            studentInfo.setStatus(studentEntity.getStatus());
-            return studentInfo;
+            return new StudentResponse(
+                    studentEntity.getId(),
+                    studentEntity.getName(),
+                    studentEntity.getGrade(),
+                    studentEntity.getClassNumber(),
+                    studentEntity.getStudentNumber(),
+                    studentEntity.getStatus()
+            );
         }
         return null;
     }
 
-    public List<StudentInfo> getStudentByClassNumber(int classNumber) {
-        return studentRepository.findByClassNumber(classNumber).stream().map(entity -> {
-            StudentInfo info = new StudentInfo();
-            info.setId(entity.getId());
-            info.setGrade(entity.getGrade());
-            info.setClassNumber(entity.getClassNumber());
-            info.setName(entity.getName());
-            info.setStatus(entity.getStatus());
-            return info;
+    public List<StudentResponse> getAllStudent() {
+        return studentRepository.findAll().stream().map(entity -> {
+            return new StudentResponse(
+                    entity.getId(),
+                    entity.getName(),
+                    entity.getGrade(),
+                    entity.getClassNumber(),
+                    entity.getStudentNumber(),
+                    entity.getStatus()
+            );
         }).collect(Collectors.toList());
     }
 }

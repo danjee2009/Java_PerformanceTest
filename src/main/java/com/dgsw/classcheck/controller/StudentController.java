@@ -26,18 +26,18 @@ public class StudentController {
         return new CommonResponse("delete");
     }
 
-    @PatchMapping("/update")
+    @PutMapping("/update")
     public CommonResponse updateStudent(@PathVariable Long id, @RequestBody StudentRequest studentInfo) {
 
     }
 
     @GetMapping("/getAll")
-    public List<StudentInfo> getAllStudent(@RequestParam int classNumber) {
-        return studentService.getStudentByClassNumber(classNumber);
+    public List<StudentResponse> getAllStudent(@RequestParam int classNumber) {
+        return studentService.getAllStudent();
     }
 
     @GetMapping("/get/{id}")
-    public StudentInfo getStudent(@PathVariable long id) {
+    public StudentResponse getStudent(@PathVariable long id) {
         return studentService.getStudentById(id);
     }
 
