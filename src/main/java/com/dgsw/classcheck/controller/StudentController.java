@@ -1,23 +1,18 @@
 package com.dgsw.classcheck.controller;
 
-import com.dgsw.classcheck.dto.CommonResponse;
-import com.dgsw.classcheck.dto.StudentAddRequest;
-import com.dgsw.classcheck.dto.StudentRequest;
-import com.dgsw.classcheck.dto.StudentResponse;
+import com.dgsw.classcheck.dto.*;
 import com.dgsw.classcheck.service.StudentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class StudentController {
     private final StudentService studentService;
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
-    }
 
     @PostMapping("/add")
     public CommonResponse registerStudent(@RequestBody StudentAddRequest studentInfo) {
@@ -37,14 +32,15 @@ public class StudentController {
     }
 
     @GetMapping("/getAll")
-    public List<StudentResponse> getAllStudent() {
-
-
+    public List<StudentInfo> getAllStudent(@RequestParam int classNumber) {
+        return studentService.getStudentByClassNumber(classNumber);
     }
 
     @GetMapping("/get/{id}")
-    public StudentResponse getStudent(@PathVariable Long id) {
-
+    public StudentInfo getStudent(@PathVariable long id) {
+        return studentService.getStudentById(id);
     }
+
+
 
 }

@@ -24,7 +24,7 @@ public class StudentService {
                 studentInfo.getGrade(),
                 studentInfo.getClassNumber(),
                 studentInfo.getNumber(),
-                Status.absence
+                Status.ABSENCE
         );
         studentRepository.save(entity);
     }
@@ -41,15 +41,16 @@ public class StudentService {
         return null;
     }
 
-    public StudentInfo getStudentByClass(long id) {
+    public StudentInfo getStudentById(long id) {
         Optional<StudentEntity> optional = studentRepository.findById(id);
-
         if (optional.isPresent()) {
             StudentEntity studentEntity = optional.get();
             StudentInfo studentInfo = new StudentInfo();
             studentInfo.setId(studentEntity.getId());
             studentInfo.setName(studentEntity.getName());
+            studentInfo.setGrade(studentEntity.getGrade());
             studentInfo.setClassNumber(studentEntity.getClassNumber());
+            studentInfo.setStatus(studentEntity.getStatus());
             return studentInfo;
         }
         return null;
