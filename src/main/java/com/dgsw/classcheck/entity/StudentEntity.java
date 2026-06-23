@@ -10,6 +10,8 @@ import lombok.*;
 @Getter
 @Setter
 @Table(name="STUDENT")
+@NoArgsConstructor
+@AllArgsConstructor
 public class StudentEntity {
     @Id
     private Long id;
@@ -19,5 +21,20 @@ public class StudentEntity {
     private int classNumber;
     private int StudentNumber;
     private Status status;
+
+    public StudentEntity(String name, int grade, int classNumber, int StudentNumber, Status status) {
+        this.id = getStudentCode(grade, classNumber, StudentNumber);
+        this.name = name;
+        this.grade = grade;
+        this.classNumber = classNumber;
+        this.StudentNumber = StudentNumber;
+        this.status = status;
+    }
+
+    public static long getStudentCode(int grade, int classroom, int number) {
+        return Long.parseLong(
+                String.format("%d%d%02d", grade, classroom, number)
+        );
+    }
 
 }
