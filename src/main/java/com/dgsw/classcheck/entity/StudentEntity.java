@@ -3,8 +3,13 @@ package com.dgsw.classcheck.entity;
 import com.dgsw.classcheck.statusEnum.StatusEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.*;
 
 @Entity
+@Getter
+@Setter
+@Table(name="STUDENT")
 public class StudentEntity {
     @Id
     private Long id;
