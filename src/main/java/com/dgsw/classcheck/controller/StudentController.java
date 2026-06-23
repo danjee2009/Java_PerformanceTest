@@ -1,6 +1,7 @@
 package com.dgsw.classcheck.controller;
 
 import com.dgsw.classcheck.dto.CommonResponse;
+import com.dgsw.classcheck.dto.StudentAddRequest;
 import com.dgsw.classcheck.dto.StudentRequest;
 import com.dgsw.classcheck.dto.StudentResponse;
 import com.dgsw.classcheck.service.StudentService;
@@ -19,14 +20,14 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-    public CommonResponse registerStudent(@RequestBody StudentRequest studentInfo) {
-        studentService.RegisterStudent();
+    public CommonResponse registerStudent(@RequestBody StudentAddRequest studentInfo) {
+        studentService.RegisterStudent(studentInfo);
         return new CommonResponse("add");
     }
 
     @DeleteMapping("/delete/{id}")
     public CommonResponse deleteStudent(@PathVariable Long id) {
-        studentService.RemoveStudent();
+        studentService.RemoveStudent(id);
         return new CommonResponse("delete");
     }
 
