@@ -43,10 +43,14 @@ public class StudentService {
         return "삭제 완료";
     }
     @Transactional
-    public void UpdateStudent(StudentRequest studentInfo) {
-        if (!studentRepository.existsById(studentInfo.getId())) {
-            throw new IllegalArgumentException("학생을 찾을 수 없습니다.");
-        }
+    public String UpdateStudent(StudentRequest studentInfo) {
+        StudentEntity entity = studentRepository.findById(studentInfo.getId()).orElseThrow(
+                () -> new RuntimeException("학생 없음")
+        );
+
+        entity.setStatus(studentInfo.getStatus());
+        studentRepository.save(entity);
+        return "저장 완료";
 
     }
 

@@ -29,10 +29,10 @@ public class StudentController {
         return new CommonResponse(result);
     }
 
-    @PatchMapping("/update/")
+    @PatchMapping("/update")
     public CommonResponse updateStudent(@RequestBody StudentRequest studentInfo) {
         studentService.UpdateStudent(studentInfo);
-        return  new CommonResponse("수정 완료");
+        return new CommonResponse("수정 완료");
     }
 
     @GetMapping("/getAll")
