@@ -12,24 +12,26 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/student")
 public class StudentController {
     private final StudentService studentService;
 
     @PostMapping("/add")
     public CommonResponse registerStudent(@RequestBody StudentAddRequest studentInfo) {
         studentService.RegisterStudent(studentInfo);
-        return new CommonResponse("add");
+        return new CommonResponse("추가 완료");
     }
 
     @DeleteMapping("/delete/{id}")
     public CommonResponse deleteStudent(@PathVariable Long id) {
         studentService.RemoveStudent(id);
-        return new CommonResponse("delete");
+        return new CommonResponse("삭제 완료");
     }
 
     @PatchMapping("/update/")
     public CommonResponse updateStudent(@RequestBody StudentRequest studentInfo) {
         studentService.UpdateStudent(studentInfo);
+        return  new CommonResponse("수정 완료");
     }
 
     @GetMapping("/getAll")
@@ -40,8 +42,6 @@ public class StudentController {
     @GetMapping("/get/{id}")
     public StudentResponse getStudent(@PathVariable long id) {
         return studentService.getStudentById(id);
-    }
-
     }
 
 }

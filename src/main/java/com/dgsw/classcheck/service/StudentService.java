@@ -3,7 +3,6 @@ package com.dgsw.classcheck.service;
 import com.dgsw.classcheck.dto.StudentAddRequest;
 import com.dgsw.classcheck.dto.StudentRequest;
 import com.dgsw.classcheck.dto.StudentResponse;
-import com.dgsw.classcheck.dto.StudentInfo;
 import com.dgsw.classcheck.entity.StudentEntity;
 import com.dgsw.classcheck.repository.StudentRepository;
 import com.dgsw.classcheck.statusEnum.Status;
