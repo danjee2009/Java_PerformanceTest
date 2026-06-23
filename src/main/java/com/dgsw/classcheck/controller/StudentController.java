@@ -26,7 +26,7 @@ public class StudentController {
         return new CommonResponse("delete");
     }
 
-    @PutMapping("/update")
+    @PatchMapping("/update")
     public CommonResponse updateStudent(@PathVariable Long id, @RequestBody StudentRequest studentInfo) {
 
     }

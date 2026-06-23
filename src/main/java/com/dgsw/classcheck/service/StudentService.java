@@ -6,6 +6,7 @@ import com.dgsw.classcheck.dto.StudentInfo;
 import com.dgsw.classcheck.entity.StudentEntity;
 import com.dgsw.classcheck.repository.StudentRepository;
 import com.dgsw.classcheck.statusEnum.Status;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,12 @@ public class StudentService {
             throw new IllegalArgumentException("학생을 찾을 수 없습니다.");
         }
         studentRepository.deleteById(id);
+    }
+    @Transactional
+    public void UpdateStudent(Long id, StudentAddRequest studentInfo) {
+        if (!studentRepository.existsById(id)) {
+
+        }
     }
 
     public List<StudentResponse> getStudentByName(String name) {
