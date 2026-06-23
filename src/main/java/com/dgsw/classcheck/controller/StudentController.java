@@ -18,8 +18,9 @@ public class StudentController {
 
     @PostMapping("/add")
     public CommonResponse registerStudent(@RequestBody StudentAddRequest studentInfo) {
-        studentService.RegisterStudent(studentInfo);
-        return new CommonResponse("추가 완료");
+        String result = studentService.RegisterStudent(studentInfo);
+        System.out.printf(studentInfo.toString());
+        return new CommonResponse(result);
     }
 
     @DeleteMapping("/delete/{id}")

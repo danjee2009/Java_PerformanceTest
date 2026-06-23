@@ -19,8 +19,12 @@ import java.util.stream.Collectors;
 public class StudentService {
     private final StudentRepository studentRepository;
 
-    public void RegisterStudent(StudentAddRequest studentInfo) {
+    public String RegisterStudent(StudentAddRequest studentInfo) {
+        if (studentRepository.existsById(getStudentCode(studentInfo.getGrade(), studentInfo.getClassNumber(), studentInfo.getNumber()))) {
+            return "이미 존재하는 학번입니다.";
+        }
         StudentEntity entity = new StudentEntity(
+                getStudentCode(studentInfo.getGrade(), studentInfo.getClassNumber(), studentInfo.getNumber()),
                 studentInfo.getName(),
                 studentInfo.getGrade(),
                 studentInfo.getClassNumber(),
@@ -28,6 +32,7 @@ public class StudentService {
                 Status.ABSENCE
         );
         studentRepository.save(entity);
+        return "학생 추가 완료";
     }
 
     public void RemoveStudent(Long id) {
@@ -76,5 +81,11 @@ public class StudentService {
                     entity.getStatus()
             );
         }).collect(Collectors.toList());
+    }
+
+    public static long getStudentCode(int grade, int classroom, int number) {
+        return Long.parseLong(
+                String.format("%d%d%02d", grade, classroom, number)
+        );
     }
 }

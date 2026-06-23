@@ -22,8 +22,8 @@ public class StudentEntity {
     private int StudentNumber;
     private Status status;
 
-    public StudentEntity(String name, int grade, int classNumber, int StudentNumber, Status status) {
-        this.id = getStudentCode(grade, classNumber, StudentNumber);
+    public StudentEntity(long id, String name, int grade, int classNumber, int StudentNumber, Status status) {
+        this.id = id;
         this.name = name;
         this.grade = grade;
         this.classNumber = classNumber;
@@ -31,10 +31,6 @@ public class StudentEntity {
         this.status = status;
     }
 
-    public static long getStudentCode(int grade, int classroom, int number) {
-        return Long.parseLong(
-                String.format("%d%d%02d", grade, classroom, number)
-        );
-    }
+
 
 }
