@@ -35,11 +35,12 @@ public class StudentService {
         return "학생 추가 완료";
     }
 
-    public void RemoveStudent(Long id) {
+    public String RemoveStudent(Long id) {
         if (!studentRepository.existsById(id)) {
-            throw new IllegalArgumentException("학생을 찾을 수 없습니다.");
+            return "존재하지 않는 학생입니다.";
         }
         studentRepository.deleteById(id);
+        return "삭제 완료";
     }
     @Transactional
     public void UpdateStudent(StudentRequest studentInfo) {
@@ -58,6 +59,7 @@ public class StudentService {
         Optional<StudentEntity> optional = studentRepository.findById(id);
         if (optional.isPresent()) {
             StudentEntity studentEntity = optional.get();
+            System.out.println(studentEntity);
             return new StudentResponse(
                     studentEntity.getId(),
                     studentEntity.getName(),

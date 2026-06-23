@@ -12,6 +12,7 @@ import lombok.*;
 @Table(name="STUDENT")
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class StudentEntity {
     @Id
     private Long id;

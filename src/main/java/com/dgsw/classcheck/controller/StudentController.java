@@ -25,8 +25,8 @@ public class StudentController {
 
     @DeleteMapping("/delete/{id}")
     public CommonResponse deleteStudent(@PathVariable Long id) {
-        studentService.RemoveStudent(id);
-        return new CommonResponse("삭제 완료");
+        String result = studentService.RemoveStudent(id);
+        return new CommonResponse(result);
     }
 
     @PatchMapping("/update/")
@@ -36,7 +36,7 @@ public class StudentController {
     }
 
     @GetMapping("/getAll")
-    public List<StudentResponse> getAllStudent(@RequestParam int classNumber) {
+    public List<StudentResponse> getAllStudent() {
         return studentService.getAllStudent();
     }
 
