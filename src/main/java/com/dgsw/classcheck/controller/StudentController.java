@@ -38,6 +38,7 @@ public class StudentController {
     @GetMapping("/getAll")
     public List<StudentResponse> getAllStudent() {
 
+
     }
 
     @GetMapping("/get/{id}")
